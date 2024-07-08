@@ -1,0 +1,83 @@
+In this scenario, you're working on a React Native application that requires effective state management to handle user interactions and data updates across multiple components. Your task is to discuss your approach to state management in a scenario where local component state isn't sufficient, and you need to manage shared state across the application.
+
+    Consider the following basic components in the app:
+
+//store.js
+    import {makeAutoObserbable} from 'mobx'
+class UserStore(
+    user: {
+        name: "Arianna"
+    }
+setUserData()
+)
+
+App.js
+    ```javascript
+import React from 'react';
+import UserProfile from './UserProfile';
+import UserSettings from './UserSettings';
+
+const App = () => {
+  return (
+    <>
+      <UserProfile />
+      <UserSettings />
+    </>
+  );
+};
+
+export default App;
+```
+
+UserProfile.js
+    ```javascript
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const UserProfile = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    // Fetch user data
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text>{userData ? `Hello, ${userData.name}` : 'Loading...'}</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {/* styles */},
+});
+
+export default UserProfile;
+```
+
+UserSettings.js
+    ```javascript
+import React from 'react';
+import { View, Button, StyleSheet } from 'react-native';
+
+const UserSettings = () => {
+  // Settings actions that might need to update `userData`
+
+  return (
+    <View style={styles.container}>
+      <Button title="Update Profile" onPress={() => {/* Update user data */}} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {/* styles */},
+});
+
+export default UserSettings;
+```
+
+1. Discuss some of the possible state management solution(s) you might use (e.g., Context API, Redux, MobX, etc.) and why.
+2. What are some of the possible ways to implement shared state between UserProfile and UserSettings?
+3. What are some possible approaches to fetching and updating data in these shared state setups?
+4. What are some of the performance implications of potential state management strategies, and how would you address them?
